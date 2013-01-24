@@ -1,0 +1,22 @@
+{
+	"name" : "webit/sps-file",
+	"type": "library",
+	"description": "Web-IT SPS Parser",
+	"keywords": ["web-it","sps"],
+	"homepage": "http://www.web-it.eu",
+	"license": "Web-IT",
+	"authors": [
+		{
+			"name": "Web-IT",
+			"homepage": "http://www.web-it.eu"
+		}
+	],
+	"require": {
+		"php": ">=5.3.2"
+	},
+	"autoload": {
+		"psr-0": {
+			"Webit\\Parser\\Sps" : "lib/"
+		}
+	}
+}
