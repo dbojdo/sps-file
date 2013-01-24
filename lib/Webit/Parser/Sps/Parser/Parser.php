@@ -27,7 +27,7 @@ class Parser {
 		$file = new \SplFileInfo($filename);
 		$fh = fopen($file->getPathname(),'r');
 		
-		$sps = new Sps($file->getFilename());
+		$sps = new Sps($file->getPathname());
 		
 		$i = 0;
 		while($line = fgets($fh)) {
