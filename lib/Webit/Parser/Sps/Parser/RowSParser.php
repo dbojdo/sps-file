@@ -9,7 +9,7 @@ class RowSParser extends AbstractRowParser {
 	 * @see Webit\Parser\Sps\Parser.AbstractRowParser::parse()
 	 */	
 	public function parse($line, $rowIndex) {
-		$row = new RowS($rowIndex);
+		$row = $this->createRow($rowIndex);
 			$row->setSourceString($line);
 			$line = rtrim($line,';');
 			
@@ -31,6 +31,10 @@ class RowSParser extends AbstractRowParser {
 		return $row;
 	}
 	
+	protected function createRow($rowIndex) {
+		return new RowS($rowIndex);
+	}
+	
 	/**
    * Line name 2-11 (right) F10.2 -999999.99 9999999.99 
    * @param string $line
@@ -38,11 +42,11 @@ class RowSParser extends AbstractRowParser {
 	 */
 	protected function getLineName($line) {
 		$line = trim(substr($line, 1, 10));
-		if($line) {
+		if(!empty($line)) {
 			$line = (float)$line;
 		}
 		
-		return $line;
+		return null;
 	}
 	
 	/**

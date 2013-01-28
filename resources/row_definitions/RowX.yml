@@ -1,0 +1,62 @@
+Webit\Parser\Sps\Row\RowX:
+  positions:
+    type:
+      start: 1
+      end: 1
+    fieldTapeNumber:
+      start: 2
+      end: 7
+    fieldRecordNumber:
+      type: int
+      start: 8
+      end: 15
+    fieldRecordIncrement:
+      type: int
+      start: 16
+      end: 16
+    instrumentCode:
+      start: 17
+      end: 17
+    lineName:
+      type: float
+      start: 18
+      end: 27
+    pointNumber:
+      type: float
+      start: 28
+      end: 37
+    pointIndex:
+      type: int
+      start: 38
+      end: 38
+    fromChannel:
+      type: int
+      start: 39
+      end: 43
+    toChannel:
+      type: int
+      start: 44
+      end: 48
+    channelIncrement:
+      type: int
+      start: 49 
+      end: 49
+    reciverLineName:
+      type: float
+      start: 50
+      end: 59
+    fromReciver:
+      type: float
+      start: 60
+      end: 69
+    toReciver:
+      type: float
+      start: 70
+      end: 79
+    reciverIndex:
+      type: int
+      start: 80
+      end: 80
+    sourceString:
+      start: 1
+      end: 80

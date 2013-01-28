@@ -1,6 +1,6 @@
 <?php
 namespace Webit\Parser\Sps\Row;
-class Row {
+abstract class Row {
 	const ROW_TYPE_HEADER = 'H';
 	const ROW_TYPE_SOURCE = 'S';
 	const ROW_TYPE_RECIVE = 'R';
@@ -12,6 +12,24 @@ class Row {
 	 */
 	protected $rowIndex;
 
+	/**
+	 * Min to max: -999999.99 to 9999999.99
+	 * @var float(10.2)
+	 */
+	protected $lineName;
+
+	/**
+	 * Min to max: -999999.99 to 9999999.99
+	 * @var float(10.2)
+	 */
+	protected $pointNumber;
+
+	/**
+	 * Min to max: 1 to 9
+	 * @var int
+	 */
+	protected $pointIndex;
+	
 	/**
 	 * 
 	 * @var string
@@ -34,6 +52,31 @@ class Row {
 	
 	public function getType() {
 		return $this->type;
+	}
+	
+	
+	public function getLineName() {
+		return $this->lineName;
+	}
+	
+	public function setLineName($lineName) {
+		$this->lineName = $lineName;
+	}
+	
+	public function getPointNumber() {
+		return $this->pointNumber;
+	}
+	
+	public function setPointNumber($pointNumber) {
+		$this->pointNumber = $pointNumber;
+	}
+	
+	public function getPointIndex() {
+		return $this->pointIndex;
+	}
+	
+	public function setPointIndex($pointIndex) {
+		$this->pointIndex = $pointIndex;
 	}
 	
 	public function setSourceString($sourceString) {

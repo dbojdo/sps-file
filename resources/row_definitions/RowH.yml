@@ -1,0 +1,22 @@
+Webit\Parser\Sps\Row\RowH:
+  positions:
+    type:
+      type: string
+      start: 1
+      end: 1
+    headerType:
+      type: string
+      start: 2
+      end: 3
+    headerTypeModified:
+      type: string
+      start: 4
+      end: 4
+    description:
+      type: string
+      start: 5
+      end: 32
+    value:
+      type: string
+      start: 33
+      end: 80

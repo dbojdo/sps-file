@@ -1,26 +1,10 @@
 <?php
 namespace Webit\Parser\Sps\Row;
+use Webit\Parser\Sps\Row\RowX;
+
 class RowS extends Row {
 	const POINT_CODE_PM = 'PM';
 	const POINT_CODE_KL = 'KL';
-	
-	/**
-	 * Min to max: -999999.99 to 9999999.99
-	 * @var float(10.2)
-	 */
-	protected $lineName;
-
-	/**
-	 * Min to max: -999999.99 to 9999999.99
-	 * @var float(10.2)
-	 */
-	protected $pointNumber;
-
-	/**
-	 * Min to max: 1 to 9
-	 * @var int
-	 */
-	protected $pointIndex;
 
 	/**
 	 * 
@@ -92,30 +76,6 @@ class RowS extends Row {
 		parent::__construct($rowIndex);
 		
 		$this->type = self::ROW_TYPE_SOURCE;
-	}
-
-	public function getLineName() {
-		return $this->lineName;
-	}
-
-	public function setLineName($lineName) {
-		$this->lineName = $lineName;
-	}
-
-	public function getPointNumber() {
-		return $this->pointNumber;
-	}
-
-	public function setPointNumber($pointNumber) {
-		$this->pointNumber = $pointNumber;
-	}
-
-	public function getPointIndex() {
-		return $this->pointIndex;
-	}
-
-	public function setPointIndex($pointIndex) {
-		$this->pointIndex = $pointIndex;
 	}
 
 	public function getPointCode() {
@@ -218,6 +178,17 @@ class RowS extends Row {
 		$date = \DateTime::createFromFormat($format, $time);
 		
 		return $date;
+	}
+	
+	/**
+	 * 
+	 * @param RowX $rowX
+	 * @return boolean
+	 */
+	public function isRelatedTo(RowX $rowX) {
+		return $rowX->getLineName() == $this->getLineName() 
+						&& $rowX->getPointNumber() == $this->getPointNumber() 
+						&& $rowX->getPointIndex() == $this->getPointIndex();
 	}
 }
 ?>
