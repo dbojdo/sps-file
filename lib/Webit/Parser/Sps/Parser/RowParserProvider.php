@@ -5,25 +5,25 @@ use Webit\Parser\FixedWidth\Parser\Parser as FixedWidthParser;
 
 use Webit\Parser\FixedWidth\RowConfig\YamlDriver;
 
-class RowParserProvider {
+class RowParserProvider implements RowParserProviderInterface {
 	/**
 	 * 
 	 * @var string
 	 */
-	private $definitionsDir;
+	protected $definitionsDir;
 	
 	/**
 	 * 
 	 * @var Parser
 	 */
-	private $fwParser;
+	protected $fwParser;
 	
 	/**
 	 * @var YamlDriver
 	 */
-	private $driver;
+	protected $driver;
 	
-	private $parsers = array();
+	protected $parsers = array();
 	
 	public function __construct($definitionsDir = null) {
 		$this->fwParser = new FixedWidthParser();

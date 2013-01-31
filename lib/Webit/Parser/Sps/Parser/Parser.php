@@ -15,7 +15,7 @@ use Webit\Parser\Sps\Row\RowInterface;
 
 class Parser {
 	/**
-   * @var RowParserProvider
+   * @var RowParserProviderInterface
 	 */
 	protected $rowParserProvider;
 	
@@ -25,7 +25,7 @@ class Parser {
 	 */
 	protected $rowParsers = array();
 	
-	public function __construct(RowParserProvider $rowParserProvider = null) {
+	public function __construct(RowParserProviderInterface $rowParserProvider = null) {
 		$this->rowParserProvider = $rowParserProvider ?: new RowParserProvider();
 	}
 	
