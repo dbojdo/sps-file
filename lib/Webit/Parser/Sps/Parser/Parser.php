@@ -75,7 +75,7 @@ class Parser {
 		return $line[0];
 	}
 	
-	private function createSps($type, $pathname) {
+	protected function createSps($type, $pathname) {
 		switch($type) {
 			case RowInterface::ROW_TYPE_SOURCE:
 				return new Sps($pathname);

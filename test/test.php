@@ -1,5 +1,5 @@
 <?php
-$autoloader = require_once('/Users/dbojdo/Sites/web-it/velageo/App/vendor/autoload.php');
+$autoloader = require_once('/Users/dbojdo/Sites/velageo/App/vendor/autoload.php');
 
 use Webit\Parser\Sps\File\SpsSet;
 use Webit\Parser\Sps\Row\RowInterface;

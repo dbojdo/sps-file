@@ -34,7 +34,7 @@ class RowParserProvider implements RowParserProviderInterface {
 		$this->buildParsers();
 	}
 
-	private function buildParsers() {
+	protected function buildParsers() {
 		$hParser = new RowHParser($this->fwParser);
 			$rowDef = $this->driver->buildRow($this->definitionsDir.'/RowH.yml');
 			$hParser->registerRowDefinition($rowDef, 'H');
