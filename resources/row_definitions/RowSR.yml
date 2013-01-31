@@ -42,7 +42,7 @@ Webit\Parser\Sps\Row\RowS:
       type: float
       start: 47
       end: 55
-    mapGridEasting:
+    mapGridNorthing:
       type: float
       start: 56
       end: 65

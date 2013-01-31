@@ -1,8 +1,7 @@
 <?php
 namespace Webit\Parser\Sps\Row;
-use Webit\Parser\Sps\Row\RowX;
 
-class RowS extends Row {
+class RowS extends RowDataAbstract {
 	const POINT_CODE_PM = 'PM';
 	const POINT_CODE_KL = 'KL';
 

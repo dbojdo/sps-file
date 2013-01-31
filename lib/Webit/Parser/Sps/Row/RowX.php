@@ -1,7 +1,7 @@
 <?php
 namespace Webit\Parser\Sps\Row;
 
-class RowX extends Row {
+class RowX extends RowDataAbstract {
 	/**
 	 * 
 	 * @var string

@@ -1,9 +1,8 @@
 <?php
-spl_autoload_register(function($class) {
-	$path = preg_replace('#\\\\#','/',$class).'.php';
-	require_once __DIR__.'/../lib/'.$path;
-});
+$autoloader = require_once('/Users/dbojdo/Sites/web-it/velageo/App/vendor/autoload.php');
 
+use Webit\Parser\Sps\File\SpsSet;
+use Webit\Parser\Sps\Row\RowInterface;
 use Webit\Parser\Sps\Parser\Parser;
 use Webit\Parser\Sps\Row\Row;
 
@@ -12,10 +11,14 @@ $sps = $parser->parse('20121210_01.sps');
 $rps = $parser->parse('20121210_01.rps');
 $xps = $parser->parse('20121210_01.xps');
 
-$xRows = array_values($xps->getRowsByType(Row::ROW_TYPE_CROSS));
-$sRows = array_values($sps->getRowsByType(Row::ROW_TYPE_SOURCE));
-$rRows = array_values($rps->getRowsByType(Row::ROW_TYPE_RECIVE));
+$set = SpsSet::create($xps, $sps);
 
+$xRows = array_values($xps->getRowsByType(RowInterface::ROW_TYPE_CROSS));
+$sRows = array_values($sps->getRowsByType(RowInterface::ROW_TYPE_SOURCE));
+$rRows = array_values($rps->getRowsByType(RowInterface::ROW_TYPE_RECIVE));
+
+var_dump($xRows[0]);
+die();
 echo count($xRows) ."\n";
 echo count($sRows) ."\n";
 echo count($rRows) ."\n";

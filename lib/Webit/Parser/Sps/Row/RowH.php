@@ -1,12 +1,20 @@
 <?php
 namespace Webit\Parser\Sps\Row;
-class RowH extends Row {
+use Webit\Parser\FixedWidth\File\FileRow;
+
+class RowH extends FileRow implements RowInterface {
 	const TYPE_DATE_OF_SURVEY = '02';
 	const TYPE_DATE_OF_ISSUE = '021';
-	
+
 	const TYPE_023 = '023';
-	const TYPE_26 = '26';	
-	
+	const TYPE_26 = '26';
+
+	/**
+	 * 
+	 * @var string
+	 */
+	protected $type;
+
 	/**
 	 * 
 	 * @var string
@@ -18,7 +26,7 @@ class RowH extends Row {
 	 * @var string
 	 */
 	protected $headerTypeModifier;
-	
+
 	/**
 	 * 
 	 * @var string
@@ -29,14 +37,14 @@ class RowH extends Row {
 	 * 
 	 * @var mixed
 	 */
-	protected $value = array();
+	protected $value;
 
 	public function __construct($rowIndex) {
 		parent::__construct($rowIndex);
-		
-		$this->type = Row::ROW_TYPE_HEADER;
+
+		$this->type = RowInterface::ROW_TYPE_HEADER;
 	}
-	
+
 	public function getHeaderType() {
 		return $this->headerType;
 	}
@@ -56,7 +64,7 @@ class RowH extends Row {
 	public function getHeaderTypeCanonical() {
 		return $this->headerType . $this->headerTypeModifier;
 	}
-	
+
 	public function getDescription() {
 		return $this->description;
 	}
@@ -71,6 +79,14 @@ class RowH extends Row {
 
 	public function setValue($value) {
 		$this->value = $value;
+	}
+
+	public function getType() {
+		return $this->type;
+	}
+
+	public function setType($type) {
+		$this->type = $type;
 	}
 }
 ?>

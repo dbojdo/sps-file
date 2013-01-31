@@ -1,17 +1,14 @@
 <?php
 namespace Webit\Parser\Sps\Row;
-abstract class Row {
-	const ROW_TYPE_HEADER = 'H';
-	const ROW_TYPE_SOURCE = 'S';
-	const ROW_TYPE_RECIVE = 'R';
-	const ROW_TYPE_CROSS = 'X';
-	
-	/**
-	 * 
-	 * @var int
-	 */
-	protected $rowIndex;
+use Webit\Parser\FixedWidth\File\FileRow;
 
+abstract class RowDataAbstract extends FileRow implements RowInterface {
+	/**
+	 *
+	 * @var string
+	 */
+	protected $type;
+	
 	/**
 	 * Min to max: -999999.99 to 9999999.99
 	 * @var float(10.2)
@@ -36,24 +33,13 @@ abstract class Row {
 	 */
 	protected $sourceString;
 	
-	/**
-	 * 
-	 * @var string
-	 */
-	protected $type;
-	
-	public function __construct($rowIndex) {
-		$this->rowIndex = $rowIndex;
-	}
-	
-	public function getRowIndex() {
-		return $this->rowIndex;
-	}
-	
 	public function getType() {
 		return $this->type;
 	}
 	
+	public function setType($type) {
+		$this->type = $type;
+	}
 	
 	public function getLineName() {
 		return $this->lineName;

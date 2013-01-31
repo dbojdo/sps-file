@@ -1,48 +1,15 @@
 <?php 
-namespace Webit\Parser\Sps;
+namespace Webit\Parser\Sps\File;
 
+use Webit\Parser\FixedWidth\File\File;
 use Webit\Parser\Sps\Row\Row;
 
-abstract class SpsAbstract {
-	/**
-	 *
-	 * @var array
-	 */
-	protected $rows = array();
-
-	public function addRow(Row $row) {
-		if(!in_array($row->getType(),array(Row::ROW_TYPE_HEADER,$this->getType()))) {
-			throw new \InvalidArgumentException('Cannot add Row type "'.$row->getType().'" to file type "'.$this->getType().'"');
-		}
-		
-		$this->rows[$row->getRowIndex()] = $row;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getRows() {
-		return $this->rows;
-	}
-
-	/**
-	 *
-	 * @param int $rowIndex
-	 * @return Row|NULL
-	 */
-	public function getRow($rowIndex) {
-		if (key_exists($rowIndex, $this->rows)) {
-			return $this->rows[$rowIndex];
-		}
-
-		return null;
-	}
-
+abstract class SpsAbstract extends File implements SpsFileInterface {
 	/**
 	 * @return array
 	 */
 	public function getHeaders() {
-		return $this->getRowsByType(Row::ROW_TYPE_HEADER);
+		return $this->getRowsByType(RowInterface::ROW_TYPE_HEADER);
 	}
 
 	/**
@@ -77,14 +44,6 @@ abstract class SpsAbstract {
 		});
 
 		return $arResult;
-	}
-
-	/**
-	 *
-	 * @return string|NULL
-	 */
-	public function getFilename() {
-		return $this->filename;
 	}
 
 	/**
@@ -128,6 +87,6 @@ abstract class SpsAbstract {
 		return null;
 	}
 	
-	abstract function getType();
+	abstract function getSpsType();
 }
 ?>

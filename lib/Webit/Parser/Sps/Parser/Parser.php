@@ -1,32 +1,32 @@
 <?php
 namespace Webit\Parser\Sps\Parser;
 
-use Webit\Parser\Sps\SpsAbstract;
+use Webit\Parser\Sps\File\Xps;
+use Webit\Parser\Sps\File\Rps;
+use Webit\Parser\Sps\File\Sps;
 
-use Webit\Parser\Sps\Xps;
+use Webit\Parser\FixedWidth\RowConfig\YamlDriver;
 
-use Webit\Parser\Sps\Rps;
+use Webit\Parser\FixedWidth\Parser\PositionDef;
 
-use Webit\Parser\Sps\Sps;
+use Webit\Parser\Sps\File\SpsFileInterface;
 
-use Webit\Parser\Sps\Row\Row;
+use Webit\Parser\Sps\Row\RowInterface;
 
 class Parser {
+	/**
+   * @var RowParserProvider
+	 */
+	protected $rowParserProvider;
+	
 	/**
 	 * 
 	 * @var array
 	 */
 	protected $rowParsers = array();
 	
-	public function __construct() {
-		$this->registerRowParser(new RowHParser(), Row::ROW_TYPE_HEADER);
-		$this->registerRowParser(new RowSParser(), Row::ROW_TYPE_SOURCE);
-		$this->registerRowParser(new RowRParser(), Row::ROW_TYPE_RECIVE);
-		$this->registerRowParser(new RowXParser(), Row::ROW_TYPE_CROSS);
-	}	
-	
-	public function registerRowParser(RowParserInterface $rowParser, $type) {
-		$this->rowParsers[$type] = $rowParser;
+	public function __construct(RowParserProvider $rowParserProvider = null) {
+		$this->rowParserProvider = $rowParserProvider ?: new RowParserProvider();
 	}
 	
 	/**
@@ -38,8 +38,6 @@ class Parser {
 		$file = new \SplFileInfo($filename);
 		$fh = fopen($file->getPathname(),'r');
 		
-		//$sps = new Sps($file->getPathname());
-		
 		$arRows = array();
 		$i = 0;
 		while($line = fgets($fh)) {
@@ -50,14 +48,17 @@ class Parser {
 			}
 			
 			$type = $this->getRowType($line);
-			$rowParser = $this->getRowParser($type);
+			
+			$rowParser = $this->rowParserProvider->getRowParser($type);
+
 			$row = $rowParser->parse($line,$i);
+			
 			$arRows[] = $row;
 
 			$i++;
 		}
 		fclose($fh);
-		
+
 		$sps = $this->buildSps($arRows);
 		return $sps;
 	}
@@ -76,13 +77,13 @@ class Parser {
 	
 	private function createSps($type, $pathname) {
 		switch($type) {
-			case Row::ROW_TYPE_SOURCE:
+			case RowInterface::ROW_TYPE_SOURCE:
 				return new Sps($pathname);
 			break;
-			case Row::ROW_TYPE_RECIVE:
+			case RowInterface::ROW_TYPE_RECIVE:
 				return new Rps($pathname);
 			break;
-			case Row::ROW_TYPE_CROSS:
+			case RowInterface::ROW_TYPE_CROSS:
 				return new Xps($pathname);
 			break;
 		}
@@ -92,12 +93,13 @@ class Parser {
 	
 	private function buildSps(array $arRows, \SplFileInfo $file = null) {
 		$row = count($arRows) > 0 ? $arRows[count($arRows) - 1] : null;
-		if(!$row || $row->getType() == Row::ROW_TYPE_HEADER) {
+		if(!$row || $row->getType() == RowInterface::ROW_TYPE_HEADER) {
 			throw new \Exception('No sps data rows found.');
 		}
 		
 		$sps = $this->createSps($row->getType(), ($file ? $file->getPathname() : null));
-		if(!$sps) {
+		
+		if(!($sps instanceof SpsFileInterface)) {
 			throw new \Exception('Cannot create SPS file for type: ' . $row->getType());
 		}
 		

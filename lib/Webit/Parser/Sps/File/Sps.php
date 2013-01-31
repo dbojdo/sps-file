@@ -1,13 +1,15 @@
 <?php 
-namespace Webit\Parser\Sps;
+namespace Webit\Parser\Sps\File;
+
+use Webit\Parser\Sps\Row\RowInterface;
 
 use Webit\Parser\Sps\Row\RowX;
 use Webit\Parser\Sps\Row\RowS;
 use Webit\Parser\Sps\Row\Row;
 
 class Sps extends SpsAbstract {
-	public function getType() {
-		return Row::ROW_TYPE_SOURCE;
+	public function getSpsType() {
+		return RowInterface::ROW_TYPE_SOURCE;
 	}
 	
 	public function getRowsFor(RowX $rowX) {
