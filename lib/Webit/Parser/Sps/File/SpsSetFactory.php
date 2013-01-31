@@ -1,6 +1,4 @@
 <?php
-use Webit\Parser\Sps\File\SpsSet;
-
 namespace Webit\Parser\Sps\File;
 
 class SpsSetFactory {
