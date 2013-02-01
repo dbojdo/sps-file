@@ -59,7 +59,7 @@ class Parser {
 		}
 		fclose($fh);
 
-		$sps = $this->buildSps($arRows);
+		$sps = $this->buildSps($arRows, $filename);
 		return $sps;
 	}
 	
