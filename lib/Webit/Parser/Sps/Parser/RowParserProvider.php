@@ -28,12 +28,15 @@ class RowParserProvider implements RowParserProviderInterface {
 	public function __construct($definitionsDir = null) {
 		$this->fwParser = new FixedWidthParser();
 		$this->driver = new YamlDriver();
-		
-		$this->definitionsDir = $definitionsDir ?: realpath(__DIR__.'/../../../../../resources/row_definitions');
+		$this->definitionsDir = $definitionsDir ?: $this->getDefaultResourcesDir();
 		
 		$this->buildParsers();
 	}
 
+	protected function getDefaultResourcesDir() {
+		return __DIR__.'/../../../../../resources/row_definitions';
+	}
+	
 	protected function buildParsers() {
 		$hParser = new RowHParser($this->fwParser);
 			$rowDef = $this->driver->buildRow($this->definitionsDir.'/RowH.yml');

@@ -189,5 +189,9 @@ class RowS extends RowDataAbstract {
 						&& $rowX->getPointNumber() == $this->getPointNumber() 
 						&& $rowX->getPointIndex() == $this->getPointIndex();
 	}
+	
+	public function getRowIdentifier() {
+		return 'Line: '. $this->getLineName() . ', Point number: ' . str_replace(',', '.', $this->getPointNumber()) . ', Point index: ' . $this->getPointIndex();
+	}
 }
 ?>

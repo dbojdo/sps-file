@@ -28,7 +28,8 @@ class RowParser {
 
 	protected function getRowDefinition($line, $rowIndex) {
 		if(count($this->rowDefs) == 1) {
-			$key = array_shift(array_keys($this->rowDefs));
+			$keys = array_keys($this->rowDefs);
+			$key = array_shift($keys);
 			return $this->rowDefs[$key];
 		}
 		
